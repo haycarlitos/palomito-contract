@@ -12,54 +12,6 @@ Parametric flight cancellation insurance on StarkNet. Users pay a 5% premium on 
 
 ## How It Works
 
-### Architecture Overview
-
-```
-                         PALOMITO SYSTEM ARCHITECTURE
-                         ============================
-
- +------------------+      +-------------------+      +------------------+
- |                  |      |                   |      |                  |
- |   User (Wallet)  |----->|  Next.js Frontend |----->|  AeroDataBox API |
- |   via Chipi SDK  |      |   + Vercel        |      |  (Flight Data)   |
- |                  |      |                   |      |                  |
- +--------+---------+      +--------+----------+      +------------------+
-          |                          |
-          |  USDC approve            |  Stores policy metadata
-          |  + buy_policy()          |  in PostgreSQL (off-chain)
-          |  (multicall)             |
-          v                          v
- +------------------------------------------+
- |                                          |
- |     PalomitoInsurance Contract           |
- |     (StarkNet Mainnet)                   |
- |                                          |
- |  +------------------------------------+  |
- |  |  Storage                           |  |
- |  |  - policies: Map<u256, Policy>     |  |
- |  |  - user_policy_count: Map<addr,u32>|  |
- |  |  - user_policy_at: Map<(addr,u32), |  |
- |  |                          u256>     |  |
- |  |  - owner: ContractAddress          |  |
- |  |  - usdc_token: ContractAddress     |  |
- |  +------------------------------------+  |
- |                                          |
- |  USDC balance in contract = the pool     |
- |                                          |
- +------------------------------------------+
-          ^
-          |  verify_and_pay_claim()
-          |  (admin-signed)
-          |
- +--------+----------+
- |                    |
- |  Admin Backend     |
- |  (Vercel Cron +    |-----> Resend (Email notifications)
- |   Admin Dashboard) |
- |                    |
- +--------------------+
-```
-
 ### Policy Lifecycle
 
 ```
