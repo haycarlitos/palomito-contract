@@ -284,7 +284,6 @@ The contract's USDC balance sits idle between premium collection and claim payou
 
 **Integration targets:**
 - [Nostra Finance](https://nostra.finance/) — USDC lending market on StarkNet
-- [zkLend](https://zklend.com/) — StarkNet-native lending protocol
 - [Ekubo](https://ekubo.org/) — concentrated liquidity DEX (for USDC/STRK LP)
 
 **Implementation:**
